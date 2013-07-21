@@ -106,30 +106,20 @@ def organizechord(chord = Chord()):
 	#ordering chord notes through note value math
 	counter = 0
 	ordered = 0
-	while counter <= 10:
+	while counter < 4:
 		#finding if major 3rd interval
 
-		if chord.notes[0].value - chord.notes[1].value == -4 or chord.notes[0].value - chord.notes[1].value == 8:
-			if chord.notes[1].value - chord.notes[2].value == -3 or chord.notes[1].value - chord.notes[2].value == 9:
+		if abs(chord.notes[0].value - chord.notes[1].value) == 4 or abs(chord.notes[0].value - chord.notes[1].value) == 8:
+			if abs(chord.notes[1].value - chord.notes[2].value) == 3 or abs(chord.notes[1].value - chord.notes[2].value) == 9:
 				chord.mode = 1
 				ordered = 1
-				counter = 11
-		elif chord.notes[0].value - chord.notes[1].value == 4 or chord.notes[0].value - chord.notes[1].value == -8:
-			if chord.notes[1].value - chord.notes[2].value == 3 or chord.notes[1].value - chord.notes[2].value == -9:
-				chord.mode = 1
-				ordered = 1
-				counter = 11
+				counter = 4
 		#finding if minor 3rd interval
-		elif chord.notes[0].value - chord.notes[1].value == -3 or chord.notes[0].value - chord.notes[1].value == 9:
-			if chord.notes[1].value - chord.notes[2].value == -4 or chord.notes[1].value - chord.notes[2].value == 8:
+		if abs(chord.notes[0].value - chord.notes[1].value) == 3 or abs(chord.notes[0].value - chord.notes[1].value) == 9:
+			if abs(chord.notes[1].value - chord.notes[2].value) == 4 or abs(chord.notes[1].value - chord.notes[2].value) == 8:
 				chord.mode = 0
 				ordered = 1
-				counter = 11
-		elif chord.notes[0].value - chord.notes[1].value == 3 or chord.notes[0].value - chord.notes[1].value == -9:
-			if chord.notes[1].value - chord.notes[2].value == 4 or chord.notes[1].value - chord.notes[2].value == -8:
-				chord.mode = 0
-				ordered = 1
-				counter = 11
+				counter = 4
 		#reordering
 		else:
 			chord.notes = [chord.notes[2], chord.notes[0], chord.notes[1]]
@@ -235,7 +225,7 @@ while 1:
 		response = loadsong(reply)
 		if response:
 			subprocess.Popen(["afplay", reply])
-			eg.textbox("Results ", title, "Calculated Root chord: " + response[0] + "\n" + " EchoNext Calculated Root Note and confidence: " + str(response[1])  + "\n" " EchoNext Calculated Mode and confidence: " + str(response[2]))  + "\n"
+			eg.textbox("Results ", title, "Calculated Root chord: " + response[0] + "\n" + " EchoNext Calculated Root Note and confidence: " + str(response[1]) + " note: " + str(response[1].value)  + "\n" " EchoNext Calculated Mode and confidence: " + str(response[2]))  + " key: " + str(notedict[response[2].value]) + "\n"
 
 	else:
 		sys.exit(0)
