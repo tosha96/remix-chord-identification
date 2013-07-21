@@ -225,8 +225,7 @@ while 1:
 		response = loadsong(reply)
 		if response:
 			subprocess.Popen(["afplay", reply])
-			eg.textbox("Results ", title, "Calculated Root chord: " + response[0] + "\n" + " EchoNext Calculated Root Note and confidence: " + str(response[1]) + " note: " + str(response[1].value)  + "\n" " EchoNext Calculated Mode and confidence: " + str(response[2]))  + " key: " + str(notedict[response[2].value]) + "\n"
-
+			eg.textbox("Results ", title, "Calculated Root chord: " + response[0] + "\n" + " EchoNext Calculated Root Note and confidence: " + str(response[1]) + "\n" + " EchoNext Calculated Mode and confidence: " + str(response[2]) + "\n")
 	else:
 		sys.exit(0)
 	
